@@ -1,10 +1,10 @@
-# IT MANAGER - v1.9.0
+# <img width="200" src="https://i.imgur.com/eepUIkx.png" alt="Logo ITManager"> IT MANAGER - v1.9.0
 
 Software d'interfaccia alla piattaforma open source Snipe-IT per gestione assets aziendali.
 
 ## Demo
 
-Inserisci qui un link o uno screenshot che mostri il progetto in azione.
+<img src="https://i.imgur.com/8RpNceF.png" alt="Interfaccia ITManager">
 
 ## Tecnologie Utilizzate
 
@@ -26,4 +26,5 @@ CCN_ = Carta di credito
 CCR_ = Carta di credito ricaricabile
 
 Doppia virgola (,,) indica fine della riga.
+
 - GESTIONE AUTOMOBILE - Per il check di assicurazioni/revisioni/bolli. In sviluppo.
