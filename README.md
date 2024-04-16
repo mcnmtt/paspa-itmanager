@@ -30,3 +30,6 @@ Legenda:
 | Doppia virgola (,,) | Indica fine della riga. |
 
 - GESTIONE AUTOMOBILE - Per il check di assicurazioni/revisioni/bolli. In sviluppo.
+
+## License
+
