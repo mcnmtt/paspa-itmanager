@@ -31,5 +31,5 @@ Legenda:
 
 - GESTIONE AUTOMOBILE - Per il check di assicurazioni/revisioni/bolli. In sviluppo.
 
-## License
+## License 
 
