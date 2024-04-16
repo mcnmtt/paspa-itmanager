@@ -6,6 +6,70 @@ import java.util.ArrayList;
 
 public class CheckRecords {
 
+    public ArrayList<String> getKeys(int id) throws SQLException{
+
+        DatabaseConnector connector = new DatabaseConnector();
+
+        ArrayList<String> modelList = new ArrayList<>();
+        ArrayList<String> returnList = new ArrayList<>();
+
+        try (Connection conn = connector.getConnection()) {
+
+            String query = "SELECT * FROM assets WHERE assigned_to = " + id;
+
+            try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+
+                while(rs.next()){
+
+                    modelList.add(rs.getString("model_id"));
+                }
+            };
+        } catch (SQLException e) {
+            System.out.println("Errore di connessione al database: " + e.getMessage());
+        }
+
+        for (String model : modelList) {
+            
+            if(checkModelsCategory(model).equals("22")){
+                returnList.add(checkModelsName(model));
+            }
+        }
+
+        return returnList;
+    }
+
+    public ArrayList<String> getCotini(int id) throws SQLException{
+
+        DatabaseConnector connector = new DatabaseConnector();
+
+        ArrayList<String> modelList = new ArrayList<>();
+        ArrayList<String> returnList = new ArrayList<>();
+
+        try (Connection conn = connector.getConnection()) {
+
+            String query = "SELECT * FROM assets WHERE assigned_to = " + id;
+
+            try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+
+                while(rs.next()){
+
+                    modelList.add(rs.getString("model_id"));
+                }
+            };
+        } catch (SQLException e) {
+            System.out.println("Errore di connessione al database: " + e.getMessage());
+        }
+
+        for (String model : modelList) {
+            
+            if(checkModelsCategory(model).equals("23")){
+                returnList.add(checkModelsName(model));
+            }
+        }
+
+        return returnList;
+    }
+
     public ArrayList<String> getNotebook(int id) throws SQLException{
 
         DatabaseConnector connector = new DatabaseConnector();

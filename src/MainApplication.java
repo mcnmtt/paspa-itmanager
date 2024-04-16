@@ -213,6 +213,24 @@ class DatabaseExtractor {
                         cars += ", " + "CAR_" + car;
                     }}
 
+                    String keys = "";
+                    if(checkRecords.getKeys(rs.getInt("id")).isEmpty()){
+                        keys = "false";
+                    }
+                    else{
+                    for (String key : checkRecords.getKeys(rs.getInt("id")) ) {
+                        keys += ", " + "KEY_" + key;
+                    }}
+
+                    String cotinis = "";
+                    if(checkRecords.getCotini(rs.getInt("id")).isEmpty()){
+                        cotinis = "false";
+                    }
+                    else{
+                    for (String cotini : checkRecords.getCotini(rs.getInt("id")) ) {
+                        cotinis += ", " + "CTN_" + cotini;
+                    }}
+
                     //CONTROLLA CAMPO CARTA CREDITO NORMALE
 
                     String ccn = checkRecords.hasCartaDiCredito(rs.getInt("id"));
@@ -247,6 +265,14 @@ class DatabaseExtractor {
 
                     if (cars != "false") {
                         writer.write(" " + cars.substring(2) + ",");
+                    }
+
+                    if (keys != "false") {
+                        writer.write(" " + keys.substring(2) + ",");
+                    }
+
+                    if (cotinis != "false") {
+                        writer.write(" " + cotinis.substring(2) + ",");
                     }
 
                     if (ccn != "false") {
