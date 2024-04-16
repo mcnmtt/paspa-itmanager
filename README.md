@@ -23,8 +23,10 @@ Legenda:
 | COM_ | Computer |
 | TEL_ | Cellulare |
 | CAR_ | Automobile |
-| CCN_ | Carta di credito |
-| CCR_ |  Carta di credito ricaricabile |
+| CDC_ | Carta di credito |
+| CCR_ | Carta di credito ricaricabile |
+| KEY_ | Chiave fisica (cancello/lucchetto) |
+| CTN_ | Tipologia timbratura Cotini |
 | Doppia virgola (,,) | Indica fine della riga. |
 
 - GESTIONE AUTOMOBILE - Per il check di assicurazioni/revisioni/bolli. In sviluppo.
