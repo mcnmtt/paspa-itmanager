@@ -1,3 +1,5 @@
+package com.paspa;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -24,12 +26,12 @@ public class InterfacciaApp {
         frame.setBackground(Color.decode("#333333"));
 
         // Carica l'icona
-        ImageIcon icon = new ImageIcon(getClass().getResource("img/exe.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/img/exe.png"));
         frame.setIconImage(icon.getImage()); // Imposta l'icona della finestra
 
-        ImageIcon iconAppExport= new ImageIcon(getClass().getResource("img/export.png"));
-        ImageIcon iconAppAuto = new ImageIcon(getClass().getResource("img/check-auto.png"));
-        ImageIcon iconOpenWebsite = new ImageIcon(getClass().getResource("img/snipeit-dash.png"));
+        ImageIcon iconAppExport= new ImageIcon(getClass().getResource("/img/export.png"));
+        ImageIcon iconAppAuto = new ImageIcon(getClass().getResource("/img/check-auto.png"));
+        ImageIcon iconOpenWebsite = new ImageIcon(getClass().getResource("/img/snipeit-dash.png"));
 
         JButton buttonAppEsistente = new JButton(iconAppExport);
         buttonAppEsistente.addActionListener(new ActionListener() {
