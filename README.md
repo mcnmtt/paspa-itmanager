@@ -8,7 +8,7 @@ Software d'interfaccia alla piattaforma open source Snipe-IT per gestione assets
 
 ## Tecnologie Utilizzate
 
-- Java
+- Java Maven
 - MySQL
 
 ## Funzionalità
@@ -33,3 +33,4 @@ Legenda:
 
 ## License 
 
+Questo progetto è rilasciato sotto licenza GPL-3.0.
