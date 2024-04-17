@@ -7,8 +7,14 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.SQLException;
 
 public class InterfacciaApp {
+
+    private String username;
+    private JTextField usernameField;
+    private JPasswordField passwordField;
+
     public InterfacciaApp() {
 
         try {
@@ -17,6 +23,67 @@ public class InterfacciaApp {
             e.printStackTrace();
         }
 
+        JFrame frame = new JFrame("Inserisci credenziali SnipeIT");
+
+        frame.setSize(500, 300);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBackground(Color.decode("#333333"));
+
+        ImageIcon icon = new ImageIcon(getClass().getResource("/img/exe.png"));
+        frame.setIconImage(icon.getImage()); // Imposta l'icona della finestra
+
+        JPanel loginPanel = new JPanel();
+        loginPanel.setLayout(new GridLayout(3, 1));
+        
+        JLabel usernameLabel = new JLabel("Username:");
+        usernameField = new JTextField();
+        
+        JLabel passwordLabel = new JLabel("Password:");
+        passwordField = new JPasswordField();
+        
+        JButton buttonLogin = new JButton("Login");
+        buttonLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                username = usernameField.getText();
+                String password = new String(passwordField.getPassword());
+
+                BcryptPasswordMatcher bcrypt = new BcryptPasswordMatcher();
+                CheckRecords checkRecords = new CheckRecords();
+
+                String dbPassword = "";
+
+                try {
+                    dbPassword = checkRecords.getPassword(username);
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+
+                if(bcrypt.checkPassword(password, dbPassword)){
+
+                    frame.remove(loginPanel);
+                    frame.setVisible(false);
+
+                    MainFrame();
+                }
+            }
+        });
+        
+        loginPanel.add(usernameLabel);
+        loginPanel.add(usernameField);
+        loginPanel.add(passwordLabel);
+        loginPanel.add(passwordField);
+        loginPanel.add(buttonLogin);
+        
+        frame.add(loginPanel);
+        
+        frame.setVisible(true);
+    }
+
+    public void MainFrame(){
+        
         JFrame frame = new JFrame("ITManager Launcher");
 
         frame.setSize(500, 300);

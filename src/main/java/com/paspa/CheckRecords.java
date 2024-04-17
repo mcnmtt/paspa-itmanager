@@ -313,4 +313,31 @@ public class CheckRecords {
 
         return "";
     }
+
+    public String getPassword(String username) throws SQLException {
+
+        DatabaseConnector connector = new DatabaseConnector();
+    
+        try (Connection conn = connector.getConnection()) {
+    
+            String query = "SELECT password FROM users WHERE username = '" + username + "'";
+    
+            try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+    
+                String password = "";
+    
+                if (rs.next()) {
+                    password = rs.getString(1); // L'indice del campo inizia da 1
+                }
+    
+                return password;
+    
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    
+        return "";
+    }
+    
 }
