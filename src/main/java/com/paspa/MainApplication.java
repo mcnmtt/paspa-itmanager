@@ -64,7 +64,7 @@ class DatabaseExtractionDialog extends JFrame {
         setResizable(false);
 
         // Carica l'icona
-        ImageIcon icon = new ImageIcon(getClass().getResource("img/exe.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/img/exe.png"));
         setIconImage(icon.getImage()); // Imposta l'icona della finestra
 
         JPanel panel = new JPanel();
