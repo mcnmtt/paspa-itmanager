@@ -33,3 +33,4 @@ Legenda:
 
 ## License 
 
+Questo progetto è rilasciato sotto licenza GPL-3.0.
