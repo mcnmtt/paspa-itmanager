@@ -200,11 +200,12 @@ public class CheckRecords {
         return returnList;
     }
 
-    public String hasCartaDiCredito(int id) throws SQLException{
+    public ArrayList<String> getCartaDiCredito(int id) throws SQLException{
 
         DatabaseConnector connector = new DatabaseConnector();
 
         ArrayList<String> modelList = new ArrayList<>();
+        ArrayList<String> returnList = new ArrayList<>();
 
         try (Connection conn = connector.getConnection()) {
 
@@ -224,18 +225,19 @@ public class CheckRecords {
         for (String model : modelList) {
             
             if(checkModelsCategory(model).equals("16")){
-                return "true";
+                returnList.add(checkModelsName(model));
             }
         }
 
-        return "false";
+        return returnList;
     }
 
-    public String hasCartaDiCreditoRic(int id) throws SQLException{
+    public ArrayList<String> getCartaDiCreditoRic(int id) throws SQLException{
 
         DatabaseConnector connector = new DatabaseConnector();
 
         ArrayList<String> modelList = new ArrayList<>();
+        ArrayList<String> returnList = new ArrayList<>();
 
         try (Connection conn = connector.getConnection()) {
 
@@ -255,11 +257,11 @@ public class CheckRecords {
         for (String model : modelList) {
             
             if(checkModelsCategory(model).equals("17")){
-                return "true";
+                returnList.add(checkModelsName(model));
             }
         }
 
-        return "false";
+        return returnList;
     }
 
     private String checkModelsCategory(String model) throws SQLException {

@@ -215,6 +215,8 @@ class DatabaseExtractor {
                         cars += ", " + "CAR_" + car;
                     }}
 
+                    //CONTROLLA SE VUOTO CAMPO CHAVI, ALTRIMENTI PONE TAG KEY_ DAVANTI AL NOME DEL ASSET
+
                     String keys = "";
                     if(checkRecords.getKeys(rs.getInt("id")).isEmpty()){
                         keys = "false";
@@ -223,6 +225,8 @@ class DatabaseExtractor {
                     for (String key : checkRecords.getKeys(rs.getInt("id")) ) {
                         keys += ", " + "KEY_" + key;
                     }}
+
+                    //CONTROLLA SE VUOTO CAMPO COTINI, ALTRIMENTI PONE TAG CTN_ DAVANTI AL NOME DEL ASSET
 
                     String cotinis = "";
                     if(checkRecords.getCotini(rs.getInt("id")).isEmpty()){
@@ -233,22 +237,27 @@ class DatabaseExtractor {
                         cotinis += ", " + "CTN_" + cotini;
                     }}
 
-                    //CONTROLLA CAMPO CARTA CREDITO NORMALE
+                    //CONTROLLA SE VUOTO CAMPO CARTA DI CREDITO, ALTRIMENTI PONE TAG CDC_ DAVANTI AL NOME DELLA BANCA
 
-                    String ccn = checkRecords.hasCartaDiCredito(rs.getInt("id"));
-
-                    if (!ccn.equals("false")) {
-                        ccn = "CCN_" + ccn;
+                    String carte = "";
+                    if(checkRecords.getCartaDiCredito(rs.getInt("id")).isEmpty()){
+                        carte = "false";
                     }
+                    else{
+                    for (String carta : checkRecords.getCartaDiCredito(rs.getInt("id")) ) {
+                        carte += ", " + "CDC_" + carta;
+                    }}
 
-                    //CONTROLLA CAMPO CARTA CREDITO NORMALE
+                    //CONTROLLA SE VUOTO CAMPO CARTA DI CREDITO, ALTRIMENTI PONE TAG CCR_ DAVANTI AL NOME DELLA BANCA
 
-                    String ccr = checkRecords.hasCartaDiCreditoRic(rs.getInt("id"));
-
-                    if (!ccr.equals("false")) {
-                        ccr = "CCR_" + ccr;
+                    String prepagate = "";
+                    if(checkRecords.getCartaDiCreditoRic(rs.getInt("id")).isEmpty()){
+                        prepagate = "false";
                     }
-
+                    else{
+                    for (String prepagata : checkRecords.getCartaDiCreditoRic(rs.getInt("id")) ) {
+                        prepagate += ", " + "CCR_" + prepagata;
+                    }}
                     //STAMPA NEL FILE LE INFORMAZIONI OTTENUTE
 
                     writer.write(rs.getString("employee_num") + ", " + rs.getString("first_name") + " " + rs.getString("last_name") + ",");
@@ -277,12 +286,12 @@ class DatabaseExtractor {
                         writer.write(" " + cotinis.substring(2) + ",");
                     }
 
-                    if (ccn != "false") {
-                        writer.write(" " + ccn + ",");
+                    if (carte != "false") {
+                        writer.write(" " + carte.substring(2) + ",");
                     }
 
-                    if (ccr != "false") {
-                        writer.write(" " + ccr + ",");
+                    if (prepagate != "false") {
+                        writer.write(" " + prepagate.substring(2) + ",");
                     }
 
                     writer.write("," + "\n");
