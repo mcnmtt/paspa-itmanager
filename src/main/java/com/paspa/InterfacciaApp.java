@@ -15,6 +15,8 @@ import java.sql.SQLException;
 
 public class InterfacciaApp {
 
+    public static final String DEV_VERSION = "2.0.0";
+
     private String username;
     private JPanel contentPane;
     private JTextField usernameField;
@@ -227,7 +229,7 @@ public class InterfacciaApp {
         panel.setBackground(Color.decode("#333333"));
 
         // Aggiungi l'etichetta per il numero di versione
-        JLabel versionLabel = new JLabel("© 2024 Pagano S.p.A. | Versione 1.9.0", SwingConstants.RIGHT);
+        JLabel versionLabel = new JLabel("© 2024 Pagano S.p.A. | Versione "+ DEV_VERSION, SwingConstants.RIGHT);
         versionLabel.setForeground(Color.WHITE);
         versionLabel.setFont(new Font("Arial", Font.PLAIN, 10));
         JPanel versionPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
