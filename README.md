@@ -26,7 +26,7 @@ Legenda:
 | CDC_ | Carta di credito |
 | CCR_ | Carta di credito ricaricabile |
 | KEY_ | Chiave fisica (cancello/lucchetto) |
-| CTN_ | Tipologia timbratura Cotini |
+| CTN_ | Cotini (Badge/APP) |
 | Doppia virgola (,,) | Indica fine della riga. |
 
 - GESTIONE AUTOMOBILE - Per il check di assicurazioni/revisioni/bolli. In sviluppo.
