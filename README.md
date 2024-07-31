@@ -2,9 +2,9 @@
 
 Software d'interfaccia alla piattaforma open source Snipe-IT per gestione assets aziendali.
 
-## Demo
+## Demo image
 
-<img src="https://i.imgur.com/8RpNceF.png" alt="Interfaccia ITManager">
+<img src="https://i.imgur.com/WQMPuWc.png" alt="Interfaccia ITManager">
 
 ## Tecnologie Utilizzate
 
