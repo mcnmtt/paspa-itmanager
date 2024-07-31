@@ -26,7 +26,7 @@ Legenda:
 | CAR_ | Automobile |
 | CDC_ | Carta di credito |
 | CCR_ | Carta di credito ricaricabile |
-| KEY_ | Chiave fisica (cancello/lucchetto) |
+| KEY_ | Chiave fisica (Cancello/Domotica) |
 | CTN_ | Cotini (Badge/APP) |
 | Doppia virgola (,,) | Indica fine della riga. |
 
