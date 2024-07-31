@@ -1,4 +1,4 @@
-# <img width="32" src="https://i.imgur.com/eepUIkx.png" alt="Logo ITManager">   IT MANAGER - versione 2.0.0
+# <img width="32" src="https://i.imgur.com/eepUIkx.png" alt="Logo ITManager">   IT MANAGER - versione 2.2.0
 
 Software d'interfaccia alla piattaforma open source Snipe-IT per gestione assets aziendali.
 
@@ -13,7 +13,8 @@ Software d'interfaccia alla piattaforma open source Snipe-IT per gestione assets
 
 ## Funzionalità
 
-- SNIPEIT DASHBOARD - Rimanda alla dashboard Snipe-IT (192.168.1.99) per la gestione degli assets.
+- SNIPEIT DASHBOARD - Rimanda alla dashboard Snipe-IT per la gestione degli assets.
+
 - ASSET EXPORT - Genera esportazione assets associati agli utenti.
   
 Legenda:
@@ -29,7 +30,7 @@ Legenda:
 | CTN_ | Cotini (Badge/APP) |
 | Doppia virgola (,,) | Indica fine della riga. |
 
-- GESTIONE AUTOMOBILE - Per il check di assicurazioni/revisioni/bolli. In sviluppo.
+- CHECK DOCUMENTI - Per il check dei documenti di consegna/restituzione degli asset.
 
 ## License 
 

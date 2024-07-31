@@ -1,10 +1,16 @@
 package com.paspa;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import com.paspa.bean.Location;
+import com.paspa.bean.Notebook;
+import com.paspa.bean.PCs;
+import com.paspa.bean.Utente;
 
 public class CheckRecords {
 
@@ -71,7 +77,7 @@ public class CheckRecords {
 
         return returnList;
     }
-
+    
     public ArrayList<String> getNotebook(int id) throws SQLException{
 
         DatabaseConnector connector = new DatabaseConnector();
@@ -318,6 +324,7 @@ public class CheckRecords {
 
     public String getPassword(String username) throws SQLException {
 
+
         DatabaseConnector connector = new DatabaseConnector();
     
         try (Connection conn = connector.getConnection()) {
@@ -342,4 +349,189 @@ public class CheckRecords {
         return "";
     }
     
+    public ArrayList<Utente> getAllUsersBean() throws SQLException{
+
+        DatabaseConnector connector = new DatabaseConnector();
+
+        ArrayList<Utente> userList = new ArrayList<>();
+
+        try (Connection conn = connector.getConnection()) {
+
+            String query = "SELECT id, email, first_name, last_name FROM users";
+
+            PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+                Utente utente = new Utente();
+                utente.setId(resultSet.getString("id"));
+                utente.setEmail(resultSet.getString("email"));
+                utente.setNome(resultSet.getString("first_name"));
+                utente.setCognome(resultSet.getString("last_name"));
+
+                userList.add(utente);
+            }
+
+
+        } catch (SQLException e) {
+            System.out.println("Errore di connessione al database: " + e.getMessage());
+        }
+
+        return userList;
+    }
+
+    public ArrayList<Notebook> getAllNotebooksBean() throws SQLException{
+
+        DatabaseConnector connector = new DatabaseConnector();
+
+        ArrayList<Notebook> notebookList = new ArrayList<>();
+
+        try (Connection conn = connector.getConnection()) {
+
+            String query = "SELECT assets.name, assets.asset_tag, assets.model_id, assets.assigned_to, assets.assigned_type FROM assets JOIN models ON assets.model_id = models.id WHERE models.category_id = 2";
+
+            PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+                Notebook notebook = new Notebook();
+                
+                notebook.setNome(resultSet.getString("name"));
+                notebook.setTag(resultSet.getString("asset_tag"));
+                notebook.setId_modello(resultSet.getString("model_id"));
+
+                notebook.setAssigned_type(resultSet.getString("assigned_type"));
+                if(notebook.getAssigned_type().equals("App\\Models\\Location")){
+                    Location location = getLocationById(resultSet.getInt("assigned_to"));
+                    notebook.setLocation(location);
+                }
+                if(notebook.getAssigned_type().equals("App\\Models\\User")){
+                    Utente utente = getUtenteById(resultSet.getInt("assigned_to"));
+                    notebook.setUtente(utente);
+                }
+
+                notebookList.add(notebook);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+
+            return notebookList;
+
+        } catch (SQLException e) {
+            System.out.println("Errore di connessione al database: " + e.getMessage());
+        }
+
+        return null;
+    }
+
+    public ArrayList<PCs> getAllPCsBean() throws SQLException{
+
+        DatabaseConnector connector = new DatabaseConnector();
+
+        ArrayList<PCs> pcsList = new ArrayList<>();
+
+        try (Connection conn = connector.getConnection()) {
+
+            String query = "SELECT assets.name, assets.asset_tag, assets.model_id, assets.assigned_to, assets.assigned_type FROM assets JOIN models ON assets.model_id = models.id WHERE models.category_id = 11";
+
+            PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+                PCs pcs = new PCs();
+                
+                pcs.setNome(resultSet.getString("name"));
+                pcs.setTag(resultSet.getString("asset_tag"));
+                pcs.setId_modello(resultSet.getString("model_id"));
+
+                pcs.setAssigned_type(resultSet.getString("assigned_type"));
+                if(pcs.getAssigned_type().equals("App\\Models\\Location")){
+                    Location location = getLocationById(resultSet.getInt("assigned_to"));
+                    pcs.setLocation(location);
+                }
+                if(pcs.getAssigned_type().equals("App\\Models\\User")){
+                    Utente utente = getUtenteById(resultSet.getInt("assigned_to"));
+                    pcs.setUtente(utente);
+                }
+
+                pcsList.add(pcs);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+
+            return pcsList;
+
+        } catch (SQLException e) {
+            System.out.println("Errore di connessione al database: " + e.getMessage());
+        }
+
+        return null;
+    }
+
+    public Utente getUtenteById(int id) throws SQLException{
+
+        DatabaseConnector connector = new DatabaseConnector();
+        Utente utente = null;
+
+        try (Connection conn = connector.getConnection()) {
+
+            String sql = "SELECT id, email, first_name, last_name FROM users WHERE id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                utente = new Utente();
+                utente.setId(resultSet.getString("id"));
+                utente.setEmail(resultSet.getString("email"));
+                utente.setNome(resultSet.getString("first_name"));
+                utente.setCognome(resultSet.getString("last_name"));
+            }
+
+            resultSet.close();
+            statement.close();
+
+            return utente;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public Location getLocationById(int id) throws SQLException{
+
+        DatabaseConnector connector = new DatabaseConnector();
+        Location location = null;
+
+        try (Connection conn = connector.getConnection()) {
+
+            String sql = "SELECT id, name FROM locations WHERE id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                location = new Location();
+
+                location.setId(resultSet.getString("id"));
+                location.setNome(resultSet.getString("name"));
+            }
+
+            resultSet.close();
+            statement.close();
+
+            return location;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

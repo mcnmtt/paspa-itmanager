@@ -15,12 +15,14 @@ import java.sql.SQLException;
 
 public class InterfacciaApp {
 
-    public static final String DEV_VERSION = "2.0.0";
+    public static final String DEV_VERSION = "2.2.0";
 
     private String username;
     private JPanel contentPane;
     private JTextField usernameField;
     private JPasswordField passwordField;
+
+    public JFrame frame = new JFrame("Inserisci credenziali SnipeIT");
 
     public InterfacciaApp() {
 
@@ -40,7 +42,6 @@ public class InterfacciaApp {
         int x = (screenWidth - windowWidth) / 2;
         int y = (screenHeight - windowHeight) / 2;
 
-		JFrame frame = new JFrame("Inserisci credenziali SnipeIT");
 		
 		frame.setResizable(false);
 		frame.setSize(500, 300);
@@ -160,6 +161,7 @@ public class InterfacciaApp {
 		);
 		loginPanel.setLayout(gl_loginPanel);
 		contentPane.setLayout(gl_contentPane);
+        frame.getRootPane().setDefaultButton(buttonLogin);
         frame.setVisible(true);
     }
 
@@ -178,7 +180,7 @@ public class InterfacciaApp {
         frame.setIconImage(icon.getImage()); // Imposta l'icona della finestra
 
         ImageIcon iconAppExport= new ImageIcon(getClass().getResource("/img/export.png"));
-        ImageIcon iconAppAuto = new ImageIcon(getClass().getResource("/img/check-auto.png"));
+        ImageIcon iconToDo = new ImageIcon(getClass().getResource("/img/to-do.png"));
         ImageIcon iconOpenWebsite = new ImageIcon(getClass().getResource("/img/snipeit-dash.png"));
 
         JButton buttonAppEsistente = new JButton(iconAppExport);
@@ -189,11 +191,15 @@ public class InterfacciaApp {
             }
         });
 
-        JButton buttonAppFutura = new JButton(iconAppAuto);
+        JButton buttonAppFutura = new JButton(iconToDo);
         buttonAppFutura.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                apriAppAuto();
+                try {
+                    apriToDo(frame);
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
 
@@ -242,15 +248,16 @@ public class InterfacciaApp {
     }
 
     private void apriAppExport(JFrame frame) {
-        // Sostituisci con il codice per avviare l'applicazione esistente
         MainApplication mainApp = new MainApplication();
         mainApp.execute();
         frame.setVisible(false);
     }
 
-    private void apriAppAuto() {
-        // Sostituisci con il codice per avviare l'applicazione futura
-        JOptionPane.showMessageDialog(null, "Funzionalità non disponibile.");
+    private void apriToDo(JFrame frame) throws SQLException {
+
+        ToDoFrame toDoFrame = new ToDoFrame();
+        frame.setVisible(false);
+        toDoFrame.show();
     }
 
     public static void main(String[] args) {
