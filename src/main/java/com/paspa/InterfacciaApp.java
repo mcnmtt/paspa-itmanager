@@ -11,11 +11,16 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class InterfacciaApp {
 
     public static final String DEV_VERSION = "2.2.1";
+
+    private static String updated_version = "";
 
     @SuppressWarnings("unused")
     private static final String AppId = "{{0022F7F1-376E-4F27-8846-953A126F58E7}";
@@ -267,8 +272,47 @@ public class InterfacciaApp {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new InterfacciaApp();
+
+                if(hasUpdate()){
+                    JOptionPane.showMessageDialog(null, "É disponibile un nuovo aggiornamento! ("+updated_version+")", "ITManager " + DEV_VERSION, JOptionPane.INFORMATION_MESSAGE);
+                    new InterfacciaApp();
+                }
+                if(!hasUpdate()){
+                    new InterfacciaApp();
+                }
             }
         });
+    }
+
+    private static boolean hasUpdate(){
+
+        DatabaseConnector connector = new DatabaseConnector();
+
+        String version = "";
+
+        try (Connection conn = connector.getConnection()) {
+
+            String sql = "SELECT notes FROM users WHERE id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, 1);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                version = resultSet.getString("notes");
+            }
+
+            resultSet.close();
+            statement.close();
+
+            if(version.equals(DEV_VERSION)){
+                return false;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        updated_version = version;
+        return true;
     }
 }
