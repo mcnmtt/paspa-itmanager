@@ -15,7 +15,7 @@ import java.sql.SQLException;
 
 public class InterfacciaApp {
 
-    public static final String DEV_VERSION = "2.2.0";
+    public static final String DEV_VERSION = "2.2.1";
 
     private String username;
     private JPanel contentPane;

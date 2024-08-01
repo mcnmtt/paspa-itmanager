@@ -1,4 +1,4 @@
-# <img width="32" src="https://i.imgur.com/eepUIkx.png" alt="Logo ITManager">   IT MANAGER - versione 2.2.0
+# <img width="32" src="https://i.imgur.com/eepUIkx.png" alt="Logo ITManager">   IT MANAGER - versione 2.2.1
 
 Software d'interfaccia alla piattaforma open source Snipe-IT per gestione assets aziendali.
 
