@@ -17,6 +17,9 @@ public class InterfacciaApp {
 
     public static final String DEV_VERSION = "2.2.1";
 
+    @SuppressWarnings("unused")
+    private static final String AppId = "{{0022F7F1-376E-4F27-8846-953A126F58E7}";
+
     private String username;
     private JPanel contentPane;
     private JTextField usernameField;
