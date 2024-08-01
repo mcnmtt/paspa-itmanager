@@ -74,7 +74,9 @@ public class ToDoFrame {
                 if(notebook.getUtente() != null){
                 Utente utente = notebook.getUtente();
                 RemoteFileSearcher fileSearcher = new RemoteFileSearcher();
-                boolean fileFound = fileSearcher.searchFiles("*" + utente.getNome().toLowerCase() + "*" + utente.getCognome().toLowerCase() + "*");
+                String nome = utente.getNome().toLowerCase().replaceAll("[ '\\']", "-");
+                String cognome = utente.getCognome().toLowerCase().replaceAll("[ '\\']", "-");
+                boolean fileFound = fileSearcher.searchFiles("*" + nome.toLowerCase() + "*" + cognome.toLowerCase() + "*");
                     if(fileFound){
                         StatusNotebook.add(notebook.getTag() + " " +  notebook.getNome() + " - " + utente.getNome() + " " + utente.getCognome() + " | " + "OK");}
                     if(!fileFound){
@@ -100,7 +102,9 @@ public class ToDoFrame {
                 if(pcs.getUtente() != null){
                 Utente utente = pcs.getUtente();
                 RemoteFileSearcher fileSearcher = new RemoteFileSearcher();
-                boolean fileFound = fileSearcher.searchFiles("*" + utente.getNome().toLowerCase() + "*" + utente.getCognome().toLowerCase() + "*");
+                String nome = utente.getNome().toLowerCase().replaceAll("[ '\\']", "-");
+                String cognome = utente.getCognome().toLowerCase().replaceAll("[ '\\']", "-");
+                boolean fileFound = fileSearcher.searchFiles("*" + nome.toLowerCase() + "*" + cognome.toLowerCase() + "*");
                     if(fileFound){
                         StatusPCs.add(pcs.getTag() + " " + pcs.getNome() + " - " + utente.getNome() + " " + utente.getCognome() + " | " + "OK");}
                     if(!fileFound){
